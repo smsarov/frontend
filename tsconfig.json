@@ -18,8 +18,6 @@
     "paths": {
       "@app/*": ["./app/*"],
       "@public/*": ["./public/*"],
-      "@shared/*": ["../../packages/shared/*"],
-      "@db/*": ["../../packages/shared/db/*"]
     }
   },
   "include": [
