@@ -21,7 +21,7 @@ const tabs = [
 
 export default function Header() {
   return (
-    <header className="flex flex-row justify-between items-center px-12 py-5 text bg-accent text-background text-2xl">
+    <header className="sticky top-0 z-50 flex flex-row justify-between items-center px-12 py-5 text bg-accent text-background text-2xl">
       <Link href='/' className="hover:scale-110 transition"><Logo height="80"></Logo></Link>
       <HeaderTabs tabs={tabs} />
       <ul className="flex flex-row gap-8 items-center *:hover:scale-110 *:p-0">

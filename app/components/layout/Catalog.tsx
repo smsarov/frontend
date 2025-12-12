@@ -51,41 +51,67 @@ const categories: Category[] = [
   },
 ];
 
-function CategoryBlock({ categories }: { categories: Category[] }) {
-  const [currentCategoty, setCurrentCategory] = useState<Category | null>(null);
-
-  console.log(currentCategoty);
-
+function CategoryBlock({
+  options,
+  path,
+  index,
+  handlePathChange,
+}: {
+  options: Category[];
+  path: number[];
+  index: number;
+  handlePathChange: (menuIndex: number, optionIndex?: number) => void;
+}) {
   return (
-    <div className="flex flex-row gap-10">
-      <div className="flex flex-col gap-7">
-        {categories.map((cat) => (
+    <div className="flex flex-col gap-7">
+      {options &&
+        options.map((opt, ind) => (
           <div
-            key={cat.href}
-            onMouseEnter={() => setCurrentCategory(cat)}
+            key={opt.href}
+            onMouseEnter={() => handlePathChange(index, ind)}
             className={cn(
               "flex flex-row w-[440px] justify-between items-center",
-              cat.href === currentCategoty?.href && "underline text-accent"
+              path[index] === ind && "text-accent underline"
             )}
           >
-            <Link href={cat.href} className="text-3xl">
-              {cat.label}
+            <Link href={opt.href} className="text-3xl">
+              {opt.label}
             </Link>
-            {cat.children?.length && <ChevronRight />}
+            {opt.children?.length && <ChevronRight />}
           </div>
         ))}
-      </div>
-      {currentCategoty?.children && categories.includes(currentCategoty) && (
-        <CategoryBlock categories={currentCategoty.children} />
-      )}
     </div>
   );
 }
 
 export function Catalog() {
+  const [path, setPath] = useState<number[]>([]);
+
+  const handlePathChange = (menuIndex: number, optionIndex?: number) => {
+    const newPath = path.slice(0, menuIndex);
+    if (optionIndex !== undefined && optionIndex !== null)
+      newPath.push(optionIndex);
+    setPath(newPath);
+  };
+
+  const optionsList = [categories];
+
+  for (let optionIndex of path) {
+    const lastOptions = optionsList.at(-1)!;
+    optionsList.push(lastOptions[optionIndex].children as Category[]);
+  }
+
   return (
-    <div className="flex flex-col p-8">
-      <CategoryBlock categories={categories} />
+    <div className="flex flex-row p-8 gap-2">
+      {optionsList.map((options, index) => (
+        <CategoryBlock
+          key={index}
+          path={path}
+          index={index}
+          options={options}
+          handlePathChange={handlePathChange}
+        />
+      ))}
     </div>
   );
 }

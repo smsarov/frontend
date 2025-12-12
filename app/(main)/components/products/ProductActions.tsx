@@ -62,7 +62,7 @@ export function CartButton({ inCart, productId }: CartButtonProps) {
 
   if (cartCount > 0) {
     return (
-      <div className="absolute bottom-0 h-14 p-4 right-0 z-10 flex items-center gap-1 rounded-full bg-background shadow-sm">
+      <div className="absolute bottom-4 h-14 p-4 right-4 z-10 flex items-center gap-1 rounded-full bg-background shadow-sm">
         <button
           onClick={handleDecrement}
           className="flex p-2 items-center justify-center bg-neutral-100 rounded-full text-neutral-600 transition-colors hover:bg-accent hover:text-background"
@@ -88,15 +88,6 @@ export function CartButton({ inCart, productId }: CartButtonProps) {
       className="absolute bottom-4 right-4 p-4 z-10 flex items-center bg-neutral-200 justify-center rounded-full text-primary shadow-sm transition-colors hover:bg-neutral-50 hover:text-accent"
       aria-label="Добавить в корзину"
     >
-      {/* <ShoppingBag className="h-6 w-6" /> */}
-      {/* <Image 
-        src='/icons/bag.svg'
-        alt='bag'
-        width={30}
-        height={30}
-        className="h-6 w-6 text-primary"
-        style={{color: 'var(--primary)'}}
-      /> */}
       <BagIcon width="24" height="24"/>
     </button>
   )

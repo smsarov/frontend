@@ -4,6 +4,8 @@ import { getProducts } from "./actions/products/getProductsAction";
 import { ProductCarousel } from "./components/products/ProductCarousel";
 import { ProductBrandBlock } from "./components/products/ProductBrandBlock";
 import { ProductLoader } from "./components/products/ProductLoader";
+import { ProductNote } from "./components/products/ProductNote";
+import { ProductJournal } from "./components/products/ProductJournal";
 import Image from "next/image";
 
 export default async function Main() {
@@ -27,7 +29,12 @@ export default async function Main() {
       </div>
       <Stripe />
       <div className="flex flex-col w-full gap-24 pt-16 px-12">
-        <ProductCarousel label="Бестселлеры" products={products} count={4} />
+        <ProductCarousel
+          label="Бестселлеры"
+          products={products}
+          count={4}
+          href="/"
+        />
         <ProductBrandBlock
           label="Louis Vuitton"
           href="/"
@@ -35,11 +42,12 @@ export default async function Main() {
           products={products.slice(0, 3)}
         >
           <div className="h-[560px] w-full relative">
-            <Image src="/raja.png" alt="raja.png" fill />
+            <Image src="/louis-vuitton.png" alt="raja.png" fill />
           </div>
         </ProductBrandBlock>
         <ProductCarousel
           label="Ароматы от Quentin Bisch"
+          href="/"
           products={products}
           count={4}
         />
@@ -59,8 +67,8 @@ export default async function Main() {
           insert="end"
           products={products.slice(0, 2)}
         >
-          <div className="w-[906px] h-full relative">
-            <Image src="/raja.png" alt="raja.png" fill />
+          <div className="w-[600px] h-full relative">
+            <Image src="/the-house-of-ouds.png" alt="raja.png" fill />
           </div>
         </ProductBrandBlock>
         <ProductBrandBlock
@@ -70,7 +78,7 @@ export default async function Main() {
           products={products.slice(0, 4)}
         >
           <div className="h-[560px] w-full relative">
-            <Image src="/raja.png" alt="raja.png" fill />
+            <Image src="/heavy-lux.png" alt="raja.png" fill />
           </div>
         </ProductBrandBlock>
         <ProductBrandBlock
@@ -79,12 +87,35 @@ export default async function Main() {
           insert="start"
           products={products.slice(0, 2)}
         >
-          <div className="w-[906px] h-full relative">
-            <Image src="/raja.png" alt="raja.png" fill />
+          <div className="w-[650px] h-full relative">
+            <Image src="/serge-lutens.png" alt="raja.png" fill />
           </div>
         </ProductBrandBlock>
+
+        <ProductJournal title="Beauty talk" href="/beauty-talk">
+          <ProductNote
+            title="Химия воспоминаний:"
+            subtitle="Как один аромат возвращает нас в прошлое"
+            href="/"
+          >
+            <div className="w-full h-[700px] relative">
+              <Image src="/b-talk-1.png" alt="raja.png" fill />
+            </div>
+          </ProductNote>
+          <ProductNote
+            title="Тишина в мире шума: "
+            subtitle="Почему мы ищем свой уникальный аромат"
+            href="/"
+          >
+            <div className="w-full h-[700px] relative">
+              <Image src="/b-talk-2.png" alt="raja.png" fill />
+            </div>
+          </ProductNote>
+        </ProductJournal>
+
         <ProductCarousel
           label="Восточные ароматы"
+          href="/"
           products={products}
           count={4}
         />
@@ -94,8 +125,8 @@ export default async function Main() {
           insert="end"
           products={products.slice(0, 2)}
         >
-          <div className="w-[906px] h-full relative">
-            <Image src="/raja.png" alt="raja.png" fill />
+          <div className="w-[650px] h-full relative">
+            <Image src="/diptique.png" alt="raja.png" fill />
           </div>
         </ProductBrandBlock>
         <ProductLoader

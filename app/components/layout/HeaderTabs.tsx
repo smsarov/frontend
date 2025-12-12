@@ -29,7 +29,7 @@ export default function HeaderTabs({ tabs }: HeaderTabsProps) {
                 <HoverCardTrigger href="" className="hover:underline">
                   {label}
                 </HoverCardTrigger>
-                <HoverCardContent className="mt-12 min-w-[98vw] min-h-[90vh]">
+                <HoverCardContent className="mt-12 w-screen min-h-[50vh]">
                   <Catalog />
                 </HoverCardContent>
               </HoverCard>

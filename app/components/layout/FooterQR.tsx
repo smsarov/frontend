@@ -18,7 +18,7 @@ export function FooterQR() {
         <form noValidate className="text-xl flex flex-col gap-5">
           <p>Будьте в курсе новостей и новинок</p>
           <div className="flex flex-col gap-3">
-            <div className="relative">
+            <div className="flex flex-col gap-1">
               <input
                 type="email"
                 name="email"

@@ -19,7 +19,7 @@ export function ProductVariants({ variants, productId }: ProductVariantsProps) {
           key={variant.volume}
           onClick={() => setSelectedVolume(variant.volume)}
           className={cn(
-            "relative rounded-full border px-3 py-1 text-sm font-medium transition-colors",
+            "relative rounded-full border px-3 py-1 text-sm font-medium transition-colors hover:bg-accent hover:text-background",
             selectedVolume === variant.volume
               ? "border-orange-500 bg-orange-500 text-white"
               : "border-neutral-300 bg-white text-neutral-700 hover:border-orange-300",

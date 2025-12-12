@@ -17,6 +17,7 @@
     "plugins": [{ "name": "next" }],
     "paths": {
       "@app/*": ["./app/*"],
+      "@db/*": ["./db/*"],
       "@public/*": ["./public/*"],
     }
   },

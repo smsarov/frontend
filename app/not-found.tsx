@@ -7,10 +7,10 @@ export default function NotFound() {
     <div className="min-h-screen flex flex-col">
       <Header />
       <div className="flex flex-1 h-full w-full justify-center items-center">
-        <div className="flex flex-col gap-12">
-          <div className="flex flex-col gap-2 items-center justify-center">
+        <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-8 items-center">
             <p className="text-5xl text-primary">Error 404</p>
-            <p className="text-xl font-medium text-center text-neutral-700">
+            <p className="text-xl font-medium text-center text-neutral-700 leading-7">
               Кажется что-то пошло не так! Страница, которую Вы запрашиваете, не{" "}
               <br />
               существует. Возможно, она устарела, была удалена, или был введен{" "}

@@ -9,13 +9,35 @@ import {
   InputOTPGroup,
   InputOTPSlot,
 } from "@app/components/ui/input-otp";
-import { FormEvent } from "react";
+import { FormEvent, useState, useEffect } from "react";
 
 export default function EntrancePhoneCode({
   onSubmit: handleSubmit,
+  onTroubleshooting: handleTrouble,
 }: {
   onSubmit: (e: FormEvent) => void;
+  onTroubleshooting: () => void;
 }) {
+  const [timer, setTimer] = useState(30);
+  const [canResend, setCanResend] = useState(true);
+
+  useEffect(() => {
+    if (timer > 0) {
+      const interval = setInterval(() => {
+        setTimer((prev) => prev - 1);
+      }, 1000);
+      return () => clearInterval(interval);
+    } else {
+      setCanResend(true);
+    }
+  }, [timer]);
+
+  const handleResend = () => {
+    setTimer(30);
+    setCanResend(false);
+    // TODO: Add API call to resend code
+  };
+
   const handleFormSubmit = (e: FormEvent) => {
     e.preventDefault();
     handleSubmit(e);
@@ -54,10 +76,18 @@ export default function EntrancePhoneCode({
       </InputOTP>
 
       <div className="flex flex-col gap-5">
-        <Link href="/" className="underline hover:text-accent">
-          Запросить код повторно
-        </Link>
-        <Link href="/" className="underline hover:text-accent">
+        {canResend ? (
+          <button
+            type="button"
+            onClick={handleResend}
+            className="text-left underline hover:text-accent"
+          >
+            Запросить код повторно
+          </button>
+        ) : (
+          <p>Запросить кодповторно можно через {timer} с</p>
+        )}
+        <Link href="/" className="underline hover:text-accent" onClick={handleTrouble}>
           Не приходит СМС?
         </Link>
       </div>

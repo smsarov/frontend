@@ -48,15 +48,15 @@ export function ProductCard({ product }: ProductCardProps) {
       <ProductRating rating={product.rating} />
 
       {/* Category */}
-      <p className="mb-1 text-sm text-neutral-600">{product.category}</p>
+      <p className="mb-1 text-sm text-neutral-600 group-hover:text-accent transition-colors">{product.category}</p>
 
       {/* Product Name */}
-      <h3 className="mb-2 text-base font-medium text-neutral-900 line-clamp-2">
+      <h3 className="mb-2 text-base font-medium text-neutral-900 group-hover:text-accent transition-colors line-clamp-2">
         {product.name}
       </h3>
 
       {/* Price */}
-      <p className="text-lg font-semibold text-neutral-900">
+      <p className="text-lg font-semibold text-neutral-900 group-hover:text-accent transition-colors">
         {product.price} ₽
       </p>
     </article>

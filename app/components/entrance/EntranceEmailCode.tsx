@@ -9,13 +9,35 @@ import {
   InputOTPGroup,
   InputOTPSlot,
 } from "@app/components/ui/input-otp";
-import { FormEvent } from "react";
+import { FormEvent, useState, useEffect } from "react";
 
 export default function EntranceEmailCode({
   onSubmit: handleSubmit,
+  onTroubleshooting: handleTrouble,
 }: {
   onSubmit: (e: FormEvent) => void;
+  onTroubleshooting: () => void;
 }) {
+  const [timer, setTimer] = useState(30);
+  const [canResend, setCanResend] = useState(true);
+
+  useEffect(() => {
+    if (timer > 0) {
+      const interval = setInterval(() => {
+        setTimer((prev) => prev - 1);
+      }, 1000);
+      return () => clearInterval(interval);
+    } else {
+      setCanResend(true);
+    }
+  }, [timer]);
+
+  const handleResend = () => {
+    setTimer(30);
+    setCanResend(false);
+    // TODO: Add API call to resend code
+  };
+
   const handleFormSubmit = (e: FormEvent) => {
     e.preventDefault();
     handleSubmit(e);
@@ -27,11 +49,9 @@ export default function EntranceEmailCode({
       onSubmit={handleFormSubmit}
     >
       <div className="flex flex-col gap-5">
-        <h1 className="text-5xl">
-          Подтвердите адрес <br /> электронной почты
-        </h1>
-        <p>hello_word@mail.ru</p>
-        <p>Введите код из письма</p>
+        <h1 className="text-5xl">Подтвердите почту</h1>
+        <p>hello@email.com</p>
+        <p>Введите код из СМС</p>
       </div>
 
       <InputOTP maxLength={4} pattern={REGEXP_ONLY_DIGITS} className="text-5xl">
@@ -56,18 +76,28 @@ export default function EntranceEmailCode({
       </InputOTP>
 
       <div className="flex flex-col gap-5">
-        <p>Отправим код повторно через 29 с</p>
-        <Link href="/" className="underline hover:text-accent">
-          Не приходит письмо?
+        {canResend ? (
+          <button
+            type="button"
+            onClick={handleResend}
+            className="text-left underline hover:text-accent"
+          >
+            Запросить код повторно
+          </button>
+        ) : (
+          <p>Запросить код повторно можно через {timer} с</p>
+        )}
+        <Link href="/" className="underline hover:text-accent" onClick={handleTrouble}>
+          Не приходит СМС?
         </Link>
       </div>
 
       <div className="flex flex-col w-full gap-5">
         <Button size="lg" className="w-full">
-          Подтвердить почту
+          Подтвердить номер
         </Button>
         <span className="text-xs">
-          Нажимая на кнопку «Подтвердить почту», я даю согласие на обработку
+          Нажимая на кнопку «Подтвердить номер», я даю согласие на обработку
           своих <br /> персональных данных в соответствии с{"  "}
           <Link href="/" className="text-accent">
             политикой обработки персональных данных

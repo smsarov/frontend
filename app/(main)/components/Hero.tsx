@@ -5,7 +5,7 @@ export default function Hero() {
   return (
     <div className="w-full h-[600px] bg-amber-200 flex flex-row">
       <Image
-        src="/raja.png"
+        src="/hero.png"
         alt="raja.png"
         width={906}
         height={666}

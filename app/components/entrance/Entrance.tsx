@@ -6,6 +6,8 @@ import EntrancePhoneCode from "./EntrancePhoneCode";
 import EntranceEmail from "./EntranceEmail";
 import EntrancePhone from "./EntrancePhone";
 import EntranceStart from "./EntranceStart";
+import { EntrancePhoneTroubleshooting } from "./EntrancePhoneTruobleshooting";
+import { EntranceEmailTroubleshooting } from "./EntranceEmailTroubleshooting";
 
 import { Button } from "@app/components/ui/button";
 import { ChevronLeft, X } from "lucide-react";
@@ -18,7 +20,14 @@ import {
   SheetTrigger,
 } from "@app/components/ui/sheet";
 
-type Variants = "start" | "email" | "email-code" | "phone" | "phone-code";
+type Variants =
+  | "start"
+  | "email"
+  | "email-code"
+  | "email-trouble"
+  | "phone"
+  | "phone-code"
+  | "phone-trouble";
 
 export default function Entrance({
   children,
@@ -44,8 +53,11 @@ function EntranceBody() {
   function handleBackClick() {
     if (variant === "email") return () => setVariant("start");
     if (variant === "email-code") return () => setVariant("email");
+    if (variant === "email-trouble") return () => setVariant("email-code");
+
     if (variant === "phone") return () => setVariant("start");
     if (variant === "phone-code") return () => setVariant("phone");
+    if (variant === "phone-trouble") return () => setVariant("phone-code");
   }
 
   return (
@@ -77,13 +89,19 @@ function EntranceBody() {
         <EntranceEmail onSubmit={() => setVariant("email-code")} />
       )}
       {variant === "email-code" && (
-        <EntranceEmailCode onSubmit={() => setVariant("email-code")} />
+        <EntranceEmailCode onSubmit={() => setVariant("email-code")} onTroubleshooting={() => setVariant("email-trouble")}/>
+      )}
+      {variant === "email-trouble" && (
+        <EntranceEmailTroubleshooting />
       )}
       {variant === "phone" && (
         <EntrancePhone onSubmit={() => setVariant("phone-code")} />
       )}
       {variant === "phone-code" && (
-        <EntrancePhoneCode onSubmit={() => setVariant("phone-code")} />
+        <EntrancePhoneCode onSubmit={() => setVariant("phone-code")} onTroubleshooting={() => setVariant("phone-trouble")}/>
+      )}
+      {variant === "phone-trouble" && (
+        <EntrancePhoneTroubleshooting />
       )}
     </div>
   );
